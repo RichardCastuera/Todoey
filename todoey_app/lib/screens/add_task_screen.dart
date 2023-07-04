@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todoey_app/model/task_data.dart';
 
 class AddTask extends StatelessWidget {
-  Function addTaskCallback;
-
-  AddTask({required this.addTaskCallback});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +38,8 @@ class AddTask extends StatelessWidget {
               ),
             ),
             onPressed: () {
-              addTaskCallback(newTaskTitle);
+              Provider.of<TaskData>(context, listen: false).addTask(newTaskTitle!);
+              Navigator.pop(context);
             },
             child: const Text(
               'Add',
