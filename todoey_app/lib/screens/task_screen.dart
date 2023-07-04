@@ -1,21 +1,11 @@
 import 'package:flutter/material.dart';
-import '../model/task.dart';
 import '../utilities/border_radius.dart';
 import '../widgets/task_list.dart';
 import 'add_task_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:todoey_app/model/task_data.dart';
 
-class TaskScreen extends StatefulWidget {
-  @override
-  State<TaskScreen> createState() => _TaskScreenState();
-}
-
-class _TaskScreenState extends State<TaskScreen> {
-  List<Task> tasks = [
-    Task(name: 'Buy Milk'),
-    Task(name: 'Buy Eggs'),
-    Task(name: 'Buy Bread'),
-  ];
-
+class TaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,9 +23,9 @@ class _TaskScreenState extends State<TaskScreen> {
                 padding: EdgeInsets.only(
                     bottom: MediaQuery.of(context).viewInsets.bottom),
                 child: AddTask(addTaskCallback: (newTaskTitle) {
-                  setState(() {
-                    tasks.add(Task(name: newTaskTitle));
-                  });
+                  // setState(() {
+                  //   // tasks.add(Task(name: newTaskTitle));
+                  // });
                   Navigator.pop(context);
                 }),
               ),
@@ -79,7 +69,7 @@ class _TaskScreenState extends State<TaskScreen> {
                   ),
                 ),
                 Text(
-                  '${tasks.length} Task',
+                  '${Provider.of<TaskData>(context).taskCount} Task',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18.0,
@@ -94,7 +84,7 @@ class _TaskScreenState extends State<TaskScreen> {
                 color: Colors.white,
                 borderRadius: buildBorderRadius(),
               ),
-              child: TasksList(task: tasks),
+              child: TasksList(),
             ),
           ),
         ],
