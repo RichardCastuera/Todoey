@@ -3,14 +3,9 @@ import '../utilities/border_radius.dart';
 import '../widgets/task_list.dart';
 import 'add_task_screen.dart';
 
-class TaskScreen extends StatefulWidget {
-  const TaskScreen({Key? key}) : super(key: key);
+class TaskScreen extends StatelessWidget {
+  const TaskScreen({super.key});
 
-  @override
-  State<TaskScreen> createState() => _TaskScreenState();
-}
-
-class _TaskScreenState extends State<TaskScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +17,14 @@ class _TaskScreenState extends State<TaskScreen> {
               borderRadius: buildBorderRadius(),
             ),
             context: context,
-            builder: (context) => addTask(),
+            isScrollControlled: true,
+            builder: (context) => SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: addTask(),
+              ),
+            ),
           );
         },
         backgroundColor: Colors.lightBlueAccent,
@@ -54,7 +56,7 @@ class _TaskScreenState extends State<TaskScreen> {
                   height: 10.0,
                 ),
                 Text(
-                  'Todoey',
+                  'ToDoey',
                   style: TextStyle(
                     fontSize: 50.0,
                     color: Colors.white,
@@ -77,7 +79,7 @@ class _TaskScreenState extends State<TaskScreen> {
                 color: Colors.white,
                 borderRadius: buildBorderRadius(),
               ),
-              child: tasksList(),
+              child: TasksList(),
             ),
           ),
         ],
