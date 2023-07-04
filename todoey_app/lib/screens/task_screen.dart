@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:todoey_app/widgets/task_tile.dart';
+import '../utilities/border_radius.dart';
 import '../widgets/task_list.dart';
+import 'add_task_screen.dart';
 
 class TaskScreen extends StatefulWidget {
   const TaskScreen({Key? key}) : super(key: key);
@@ -15,7 +16,15 @@ class _TaskScreenState extends State<TaskScreen> {
     return Scaffold(
       backgroundColor: Colors.lightBlueAccent,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          showModalBottomSheet(
+            shape: RoundedRectangleBorder(
+              borderRadius: buildBorderRadius(),
+            ),
+            context: context,
+            builder: (context) => addTask(),
+          );
+        },
         backgroundColor: Colors.lightBlueAccent,
         child: Icon(Icons.add),
       ),
@@ -66,10 +75,7 @@ class _TaskScreenState extends State<TaskScreen> {
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(30.0),
-                  topRight: Radius.circular(30.0),
-                ),
+                borderRadius: buildBorderRadius(),
               ),
               child: tasksList(),
             ),
